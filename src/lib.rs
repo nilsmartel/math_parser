@@ -1,8 +1,6 @@
 #[macro_use]
 extern crate nom;
 
-use nom::bytes::complete::tag;
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -187,10 +185,13 @@ named!(parse_literal<&str, Expr>,
         delimited!(tag!("("), parse_expr, tag!(")")) |
         // map_res!(delimited!(tag!("|"), parse_expr, tag!("|")), |expr| Expr::Abs(Box::new(expr))) |
 
+        map!(complete!(parse_integer), |value| Expr::Const(value as f64)) |
         map!(complete!(nom::double), |value| Expr::Const(value)) |
         // map!(nom::alphanumeric, |value| Expr::Var(value.to_string())) |
         map!(tag!("π"), |_| Expr::Const(3.141592653589793))
     )
 );
 
-named!(abc, map_res!(nom::digit, |&digits| digits));
+named!(parse_integer<&str, i64>,
+    map_res!(nom::digit1, |res: &str| res.parse::<i64>())
+);
