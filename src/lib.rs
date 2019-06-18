@@ -39,7 +39,7 @@ mod tests {
 }
 
 #[derive(Debug)]
-enum Expr {
+pub enum Expr {
     Add(Box<Expr>, Box<Expr>),
     Sub(Box<Expr>, Box<Expr>),
     Mul(Box<Expr>, Box<Expr>),
@@ -53,7 +53,7 @@ enum Expr {
 }
 
 #[derive(Copy, Clone, Debug)]
-enum FunctionID {
+pub enum FunctionID {
     Sqrt,
     Ln,
     Lb,
@@ -180,7 +180,7 @@ named!(parse_signed_literal<&str, Expr>,
 /// (<expr)
 /// |<expr>|
 /// (later) <expr, expr>
-named!(parse_literal<&str, Expr>,
+named!(pub parse_literal<&str, Expr>,
     alt!(
         delimited!(tag!("("), parse_expr, tag!(")")) |
         // map_res!(delimited!(tag!("|"), parse_expr, tag!("|")), |expr| Expr::Abs(Box::new(expr))) |

@@ -1,3 +1,6 @@
+extern crate math_parser;
+use math_parser::parse_literal;
+
 fn main() {
-    println!("Hello, world!");
+    dbg!(parse_literal("24"));
 }
