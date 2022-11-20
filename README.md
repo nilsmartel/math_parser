@@ -1,6 +1,8 @@
 # math_parser
  Rust library for parsing mathematical expressions
 
+Note: this is deprecated in favor of: https://github.com/nilsmartel/mathlang
+
 This Library is supposed to parse expressions in forms like this
 ```
 -2 + 8
@@ -12,3 +14,6 @@ ln a * |x|
 ```
 
 for now it is not ready for production
+
+
+
